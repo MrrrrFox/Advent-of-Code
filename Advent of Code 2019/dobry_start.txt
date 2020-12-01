@@ -1,0 +1,16 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	ifstream f;
+	f.open("dane.txt");
+	
+	
+	
+	f.close();
+	return 0;
+}

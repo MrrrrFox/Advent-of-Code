@@ -1,0 +1,223 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+struct krok
+{
+	int x;
+	int y;
+	krok * next;
+	int przeciety;
+	int taxi;
+};
+
+int main()
+{
+	ifstream w1;
+	ifstream w2;
+	w1.open("wire1.txt");
+	w2.open("wire2.txt");
+	
+	int kierunek;
+	int dlugosc;
+	int _x=0, _y=0;
+	
+	krok * ww1;
+	ww1 = new krok;
+	ww1->x = 0;
+	ww1->y =0;
+	ww1->next = NULL;
+	ww1->taxi = 20000;
+	krok * tail1 = ww1;
+	
+	krok * ww2;
+	ww2 = new krok;
+	ww2->x = 0;
+	ww2->y = 0;
+	ww2->next = NULL;
+	krok * tail2 = ww2;
+	
+	
+	while(w1>>kierunek>>dlugosc)
+	{
+
+		if(kierunek==1)
+		{
+			while(dlugosc-->0)
+			{
+				krok * pom = new krok;
+				pom->x = tail1->x;
+				pom->y = tail1->y + 1;
+				pom->next = NULL;
+				pom->przeciety = 0;
+				//cout<<"w1:		x = "<<pom->x<<"	y = "<<pom->y<<endl;
+				tail1->next = pom;
+				tail1 = pom;
+			}
+		}
+		if(kierunek==2)
+		{
+			while(dlugosc-->0)
+			{
+				krok * pom = new krok;
+				pom->x = tail1->x + 1;
+				pom->y = tail1->y;
+				pom->next = NULL;
+				pom->przeciety = 0;
+				//cout<<"w1:		x = "<<pom->x<<"	y = "<<pom->y<<endl;
+				tail1->next = pom;
+				tail1 = pom;
+			}			
+		}
+		if(kierunek==3)
+		{
+			while(dlugosc-->0)
+			{
+				krok * pom = new krok;
+				pom->x = tail1->x;
+				pom->y = tail1->y - 1;
+				pom->next = NULL;
+				pom->przeciety = 0;
+				//cout<<"w1:		x = "<<pom->x<<"	y = "<<pom->y<<endl;
+				tail1->next = pom;
+				tail1 = pom;
+			}			
+		}
+		if(kierunek==4)
+		{
+			while(dlugosc-->0)
+			{
+				krok * pom = new krok;
+				pom->x = tail1->x - 1;
+				pom->y = tail1->y;
+				pom->next = NULL;
+				pom->przeciety = 0;
+				//cout<<"w1:		x = "<<pom->x<<"	y = "<<pom->y<<endl;
+				tail1->next = pom;
+				tail1 = pom;
+			}			
+		}
+	}
+	
+	while(w2>>kierunek>>dlugosc)
+	{
+		if(kierunek==1)
+		{
+			while(dlugosc-->0)
+			{
+				krok * pom = new krok;
+				pom->x = tail2->x;
+				pom->y = tail2->y + 1;
+				pom->next = NULL;
+				pom->przeciety = 0;
+				//cout<<"w2:		x = "<<pom->x<<"	y = "<<pom->y<<endl;
+				tail2->next = pom;
+				tail2 = pom;
+			}
+		}
+		if(kierunek==2)
+		{
+			while(dlugosc-->0)
+			{
+				krok * pom = new krok;
+				pom->x = tail2->x + 1;
+				pom->y = tail2->y;
+				pom->next = NULL;
+				pom->przeciety = 0;
+				//cout<<"w2:		x = "<<pom->x<<"	y = "<<pom->y<<endl;
+				tail2->next = pom;
+				tail2 = pom;
+			}			
+		}
+		if(kierunek==3)
+		{
+			while(dlugosc-->0)
+			{
+				krok * pom = new krok;
+				pom->x = tail2->x;
+				pom->y = tail2->y - 1;
+				pom->next = NULL;
+				pom->przeciety = 0;
+				//cout<<"w2:		x = "<<pom->x<<"	y = "<<pom->y<<endl;
+				tail2->next = pom;
+				tail2 = pom;
+			}			
+		}
+		if(kierunek==4)
+		{
+			while(dlugosc-->0)
+			{
+				krok * pom = new krok;
+				pom->x = tail2->x - 1;
+				pom->y = tail2->y;
+				pom->next = NULL;
+				pom->przeciety = 0;
+				//cout<<"w2:		x = "<<pom->x<<"	y = "<<pom->y<<endl;
+				tail2->next = pom;
+				tail2 = pom;
+			}			
+		}
+	}
+	
+	tail1 = ww1;
+	tail2 = ww2;
+	while(tail1 != NULL)
+	{
+		while(tail2!=NULL)
+		{
+			if(tail1->x == tail2->x && tail1->y == tail2->y)
+			{
+				//cout<<"polaczony:		x = "<<tail1->x<<"	y = "<<tail1->y<<endl;
+				tail1->przeciety = 1;
+			}
+			tail2 = tail2->next;
+			
+		}
+		tail1 = tail1->next;
+		tail2 = ww2;
+	}
+	
+	tail1 = ww1->next;
+	krok * min;
+	min = ww1;
+	
+	while(tail1 != NULL)
+	{
+		if(tail1->przeciety == 1)
+		{
+			tail1->taxi = abs(tail1->x) + abs(tail1->y);
+			if(tail1->taxi < min->taxi)
+			{
+				min = tail1;
+			}
+		}
+		tail1 = tail1->next;
+	}
+
+	cout<<min->taxi<<endl;
+	
+	tail1 = ww1;
+	krok * pom1 = tail1;
+	tail2 = ww2;
+	krok * pom2 = tail2;
+	
+	while(tail1!=NULL)
+	{
+		tail1 = tail1->next;
+		delete pom1;
+		pom1 = tail1;
+	}
+	
+	while(tail2!=NULL)
+	{
+		tail2 = tail2->next;
+		delete pom2;
+		pom2 = tail2;
+	}
+	
+	w1.close();
+	w2.close();
+	return 0;
+}

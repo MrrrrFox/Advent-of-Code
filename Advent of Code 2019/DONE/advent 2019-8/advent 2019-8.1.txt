@@ -1,0 +1,64 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	ifstream f;
+	f.open("dane.txt");
+	
+	int ile=0;
+	int number;
+	while(f>>number)
+	{
+		++ile;
+	}
+	cout<<"tyle liczb: "<<ile<<endl;
+	int lon = 25;
+	int wide = 6;
+	
+	int ile_lay = ile / (lon*wide);
+	cout<<"tyle warstw: "<<ile_lay<<endl;
+	f.close();
+	
+	int tab[ile_lay][3];
+	for(int a=0; a<ile_lay;++a)
+	{
+		for(int b=0;b<3;++b)
+		{
+			tab[a][b] = 0;
+		}
+	}
+	
+	f.open("dane.txt");
+	
+	int layer = 0;
+	int pixel_num = 0;
+	while(f>>number)
+	{
+		++pixel_num;
+		if(pixel_num == lon*wide + 1)
+		{
+			pixel_num = 1;
+			++layer;
+		}
+		++tab[layer][number];
+	}
+	
+	f.close();
+	
+	int min=ile, indeks=-1;
+	for(int a=0;a<ile_lay;++a)
+	{
+		if(tab[a][0]<min)
+		{
+			min = tab[a][0];
+			indeks = a;
+		}
+	}
+	
+	cout<<tab[indeks][1]*tab[indeks][2]<<endl;
+	return 0;
+}

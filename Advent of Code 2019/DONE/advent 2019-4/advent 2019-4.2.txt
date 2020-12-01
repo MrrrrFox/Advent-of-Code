@@ -1,0 +1,54 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	// 402328 864247
+	int start = 402328;
+	int end = 864247;
+	int flaga, flaga2, flaga3, ile=0;
+	while(start <= end)
+	{
+		flaga = 0;
+		flaga2 = 0;
+		flaga3 = 0;
+		for(int i = 6; i>1; i--)
+		{
+			//cout<< start<<"		"<<start%(int)pow(10.0, (double)i) / (int)pow(10.0,(double)i-1.0)<<"		"<<start%(int)pow(10.0, (double)i-1.0) / (int)pow(10.0,(double)i-2.0)<<endl;
+			if(start%(int)pow(10.0, (double)i) / (int)pow(10.0,(double)i-1.0) <= start%(int)pow(10.0, (double)i-1.0) / (int)pow(10.0,(double)i-2.0))
+			{
+				++flaga;	
+			}
+			
+			if(start%(int)pow(10.0, (double)i) / (int)pow(10.0,(double)i-1.0) == start%(int)pow(10.0, (double)i-1.0) / (int)pow(10.0,(double)i-2.0))
+			{
+				++flaga2;
+				if(i == 2 && flaga2 == 1)
+				{
+					flaga3 = 1;
+				}
+			}	
+			else
+			{
+				if(flaga2 == 1)
+				{
+					flaga3 = 1;
+				}
+				flaga2 = 0;
+			}
+		}
+		
+		if(flaga==5 && flaga3 == 1)
+		{
+			//cout<<start<<endl;
+			++ile;
+		}
+
+		++start;
+	}
+	cout<<ile<<endl;
+	
+	return 0;
+}

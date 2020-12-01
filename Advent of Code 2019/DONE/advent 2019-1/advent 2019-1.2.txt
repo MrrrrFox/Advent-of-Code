@@ -1,0 +1,27 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	ifstream f;
+	f.open("dane.txt");
+	
+	int suma = 0;
+int k;
+while(f>>k)
+{
+	while( (k / 3) - 2 > 0)
+	{
+		k = (k / 3) - 2;
+		suma += k;
+	}
+}
+
+	cout<<suma<<endl;
+	
+	f.close();
+	return 0;
+}
