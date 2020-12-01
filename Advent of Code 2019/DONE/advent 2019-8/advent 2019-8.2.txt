@@ -1,0 +1,65 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	ifstream f;
+	f.open("dane.txt");
+	
+	int ile=0;
+	int number;
+	while(f>>number)
+	{
+		++ile;
+	}
+	cout<<"tyle liczb: "<<ile<<endl;
+	int tall = 6;
+	int wide = 25;
+	int ile_pixeli = wide * tall;
+	
+	int ile_lay = ile / ile_pixeli;
+	cout<<"tyle warstw: "<<ile_lay<<endl;
+	f.close();
+	
+	int tab[ile];
+	
+	f.open("dane.txt");
+	
+	int i=-1;
+	
+	int obraz[ile_pixeli];
+	
+	for(int a =0; a<ile_pixeli;++a)
+	{
+		obraz[a] = 2;
+	}
+	
+	while(f>>number)
+	{
+		++i;
+		if(i==ile_pixeli)
+		{
+			i=0;
+		}
+		if(obraz[i] == 2 && number!=2)
+		{
+			obraz[i] = number;
+		}
+	}
+	
+	f.close();
+
+	for(int a=0;a<tall;++a)
+	{
+		for(int b=0;b<wide;++b)
+		{
+			cout<< (obraz[wide*a+b] == 0 ? " " : "#");
+		}
+		cout<<endl;
+	}
+	
+	return 0;
+}

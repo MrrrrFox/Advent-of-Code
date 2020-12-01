@@ -1,0 +1,283 @@
+#include <iostream>
+
+using namespace std;
+
+int Perm(int*, int*, int);
+
+int main()
+{
+	int wolne[5] = {1,1,1,1,1};
+	int phase[5] = {0,1,2,3,4};
+
+	cout << "SUMA = "<< Perm(wolne, phase, 0)<<endl;
+	
+	return 0;
+}
+
+int Perm(int* wolne, int* phase, int miejsce)
+{
+	int static suma = 0;
+	int static ile=0;
+	int tabS[] = {3,8,1001,8,10,8,105,1,0,0,21,30,51,76,101,118,199,280,361,442,99999,3,9,102,5,9,9,4,9,99,3,9,102,4,9,9,1001,9,3,9,102,2,9,9,101,2,9,9,4,9,99,3,9,1002,9,3,9,1001,9,4,9,102,5,9,9,101,3,9,9,1002,9,3,9,4,9,99,3,9,101,5,9,9,102,4,9,9,1001,9,3,9,1002,9,2,9,101,4,9,9,4,9,99,3,9,1002,9,2,9,1001,9,3,9,102,5,9,9,4,9,99,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,1002,9,2,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,99,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,1002,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,1001,9,1,9,4,9,3,9,1002,9,2,9,4,9,99,3,9,102,2,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,101,1,9,9,4,9,3,9,102,2,9,9,4,9,3,9,101,2,9,9,4,9,3,9,1001,9,1,9,4,9,3,9,101,1,9,9,4,9,3,9,101,1,9,9,4,9,3,9,1001,9,2,9,4,9,3,9,1001,9,2,9,4,9,99};
+	int size = sizeof(tabS)/sizeof(tabS[0]);
+	int tabA[size], tabB[size], tabC[size], tabD[size], tabE[size];
+	for(int kk=0;kk<size;++kk)
+	{
+		tabA[kk] = tabB[kk] = tabC[kk] = tabD[kk] = tabE[kk] = tabS[kk];
+	}
+	int * tab;
+
+	for(int j = 0; j<5; ++j)
+	{
+		if(wolne[j]==1)
+		{
+			phase[miejsce] = j+5;
+			wolne[j] = 0;
+			if(miejsce == 4)
+			{
+				++ile;
+				cout<<"PODEJSCIE NUMER "<<ile;
+				// TUTAJ MAM JUZ PEWNA PERMUTAJCE FAZ A,B,C,D,E I MOGE WYWOWOLAC DLA NIEJ PROGRAM
+				
+				int i[] = {0,0,0,0,0};
+				
+				int input = 0, output;
+				int opcode;
+				int r1,r2;
+				int flaga3[] = {0,0,0,0,0};	
+				herewegoagain:
+					
+				for(int licznik1=0;licznik1<5;++licznik1)	// wywołanie dla każdego ze wzmacniaczy
+				{
+					if(licznik1 == 0)
+					{
+						tab = tabA;
+					}
+					else
+					{
+						if(licznik1==1)
+						{
+							tab = tabB;
+						}
+						else
+						{
+							if(licznik1==2)
+						{	
+								tab = tabC;
+							}
+							else
+							{
+								if(licznik1==3)
+								{
+									tab = tabD;
+								}
+								else
+								{
+									if(licznik1==4)
+									{
+										tab = tabE;
+									}
+								}
+							}
+						}
+					}
+					
+					while(1)
+					{
+						opcode = tab[i[licznik1]]%100;
+	
+						r1=tab[i[licznik1]]%1000/100;
+						r2=tab[i[licznik1]]%10000/1000;
+		
+						if(opcode == 1)
+						{
+							tab[tab[i[licznik1]+3]] = (r1==0 ? tab[tab[i[licznik1]+1]] : tab[i[licznik1]+1]) + (r2==0 ? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2]);
+				
+							i[licznik1]=i[licznik1]+4;
+						}
+						else
+						{
+							if(opcode == 2)
+							{
+							tab[tab[i[licznik1]+3]] = (r1==0 ? tab[tab[i[licznik1]+1]] : tab[i[licznik1]+1]) * (r2==0 ? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2]);
+				
+							i[licznik1]=i[licznik1]+4;
+							}
+							else
+							{
+								if(opcode == 3)
+								{
+									if(flaga3[licznik1] == 0)
+									{
+										tab[tab[i[licznik1]+1]] = phase[licznik1];
+										i[licznik1]=i[licznik1]+2;
+										flaga3[licznik1]=1;
+									}
+									else
+									{
+										tab[tab[i[licznik1]+1]] = input;
+										i[licznik1]=i[licznik1]+2;
+									}
+
+								}				
+								else
+								{
+									if(opcode == 4)
+									{
+										output = (r1==0 ? tab[tab[i[licznik1]+1]] : tab[i[licznik1]+1]);
+										i[licznik1]=i[licznik1]+2;
+										
+										if(licznik1==4)
+										{
+											licznik1=-1;
+										}
+										break;
+									}
+									else
+									{
+										if(opcode==5)
+										{
+											if(r1==0)
+											{
+												if(tab[tab[i[licznik1]+1]] != 0)
+												{
+													i[licznik1] = r2==0 ? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2];
+												}
+												else
+												{
+													i[licznik1] = i[licznik1]+3;
+												}
+											}
+											else
+											{
+												if(tab[i[licznik1]+1]!=0)
+												{
+													i[licznik1] = r2==0? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2];
+												}
+												else
+												{
+													i[licznik1]=i[licznik1]+3;
+												}
+											}
+										}
+										else
+										{
+											if(opcode == 6)
+											{
+												if(r1==0)
+												{
+													if(tab[tab[i[licznik1]+1]] ==0)
+													{
+														i[licznik1] = r2==0? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2];
+													}
+													else
+													{
+														i[licznik1]=i[licznik1]+3;
+													}
+												}
+												else
+												{
+													if(tab[i[licznik1]+1]==0)
+													{			
+														i[licznik1] = r2==0? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2];
+													}
+													else
+													{
+														i[licznik1]=i[licznik1]+3;
+													}
+												}							
+											}
+											else
+											{
+												if(opcode == 7)
+												{
+													if(r1==0)
+													{
+														if(tab[tab[i[licznik1]+1]] < (r2==0 ? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2]))
+														{
+															tab[tab[i[licznik1]+3]] = 1;
+														}
+														else
+														{
+															tab[tab[i[licznik1]+3]] = 0;
+														}
+													}
+													else
+													{
+														if(tab[i[licznik1]+1] < (r2==0 ? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2]))
+														{
+															tab[tab[i[licznik1]+3]] =1;
+														}
+														else
+														{
+															tab[tab[i[licznik1]+3]] = 0;
+														}
+													}
+													i[licznik1] = i[licznik1]+4;
+												}
+												else
+												{
+													if(opcode==8)
+													{
+														if(r1==0)
+														{
+															if(tab[tab[i[licznik1]+1]] == (r2==0 ? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2]))
+															{
+																tab[tab[i[licznik1]+3]] = 1;
+															}
+															else
+															{	
+																tab[tab[i[licznik1]+3]] = 0;
+															}
+														}
+														else
+														{
+															if(tab[i[licznik1]+1] == (r2==0 ? tab[tab[i[licznik1]+2]] : tab[i[licznik1]+2]))
+															{
+																tab[tab[i[licznik1]+3]] = 1;
+															}
+															else
+															{
+																tab[tab[i[licznik1]+3]] = 0;
+															}
+														}
+														i[licznik1]=i[licznik1]+4;									
+													}
+													else
+													{
+														if(opcode == 99)
+														{
+															break;
+														}
+													}
+												}
+											}
+										}							
+									}
+								}
+							}
+						}
+					}
+	
+				
+					input = output;			
+	
+				}
+				
+				cout<<"		OUTPUT: "<<output;
+				if(suma < output)
+				{
+					suma = output;
+				}
+				cout<<"		SUMA: "<<suma<<endl;
+			}
+			else
+			{
+				int z = Perm(wolne, phase, miejsce +1);
+			}
+			wolne[j]=1;
+		}
+	}
+	
+	return suma;
+}

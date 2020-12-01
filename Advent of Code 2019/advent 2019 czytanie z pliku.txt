@@ -1,0 +1,21 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main()
+{
+	ifstream f;
+	f.open("dane.txt");
+	int liczba;
+	int suma = 0;
+
+	while(f.eof()!=1)
+	{
+		f >> liczba;
+		cout<<liczba<<endl;
+	}
+	
+	f.close();
+	return 0;
+}

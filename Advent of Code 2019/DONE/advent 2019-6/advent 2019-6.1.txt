@@ -1,0 +1,68 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	ifstream f;
+	f.open("dane.txt");
+	
+	string a, b;
+	int i=0;
+	
+	while(f>>a>>b)
+	{
+		++i;
+	}
+	f.close();
+	
+	f.open("dane.txt");
+
+	string lewa[i];
+	string prawa[i];
+	int tab[i];
+	
+	for(int k=0;k<i;++k)
+	{
+		f>>a>>b;
+		lewa[k]=a;
+		prawa[k]=b;
+		tab[k]=0;
+	}
+	
+	string slowol, slowop;
+	
+	for(int k=0; k<i; ++k)
+	{
+		slowol=lewa[k];
+		slowop=prawa[k];
+		while(slowol != "COM")
+		{
+			++tab[k];
+			slowop=slowol;
+			for(int j=0;j<i;++j)
+			{
+				if(prawa[j] == slowop)
+				{
+					slowol = lewa[j];
+					break;
+				}
+			}
+		}
+		++tab[k];
+	}
+	
+	int suma=0;
+	
+	for(int k=0;k<i;++k)
+	{
+		suma += tab[k];
+	}
+	
+	cout<<suma<<endl;
+	
+	f.close();
+	return 0;
+}

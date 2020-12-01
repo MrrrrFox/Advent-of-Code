@@ -1,0 +1,108 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+	ifstream f;
+	f.open("dane.txt");
+	
+	string a, b;
+	int i=0;
+	int you, san;
+	
+	while(f>>a>>b)
+	{
+		++i;
+	}
+	f.close();
+	
+	f.open("dane.txt");
+
+	string lewa[i];
+	string prawa[i];
+	
+	for(int k=0;k<i;++k)
+	{
+		f>>a>>b;
+		lewa[k]=a;
+		prawa[k]=b;
+		if(prawa[k]=="YOU")
+		{
+			you =k;
+		}
+		if(prawa[k]=="SAN")
+		{
+			san =k;
+		}
+	}
+	
+	string slowosan[i], slowoyou[i];
+	int ilesan=0, ileyou=0;
+	string pom1, pom2;
+	int d = 0;
+	
+	pom1 = lewa[san];
+	pom2 = prawa[san];
+	
+	while(pom1 != "COM")
+	{
+		slowosan[d] = pom1;
+		pom2=pom1;
+		for(int j=0;j<i;++j)
+		{
+			if(prawa[j] == pom2)
+			{
+				pom1 = lewa[j];
+				break;
+			}
+		}
+		++d;
+	}
+	slowosan[d]="COM";
+	
+	int e = 0;
+	
+	pom1 = lewa[you];
+	pom2 = prawa[you];
+	
+	while(pom1 != "COM")
+	{
+		slowoyou[e] = pom1;
+		pom2=pom1;
+		for(int j=0;j<i;++j)
+		{
+			if(prawa[j] == pom2)
+			{
+				pom1 = lewa[j];
+				break;
+			}
+		}
+		++e;
+	}
+	slowoyou[e]="COM";
+	
+	int suma =0;
+	int flaga = 0;
+	
+	for(int x = 0; x<d;++x)
+	{
+		for(int y = 0; y<e;++y)
+		{
+			if(slowoyou[y]==slowosan[x])
+			{
+				suma = x+y;
+				flaga=1;
+				break;
+			}
+		}
+		if(flaga!=0) break;
+	}
+	
+	cout<<suma<<endl;
+	
+	f.close();
+	return 0;
+}
