@@ -1,0 +1,20 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+#include "../readFromFile.h"
+
+int fun_template(const vector<int> , int num)
+{
+
+}
+
+int main()
+{
+	vector<int> dane = readIntDataFromFile("dane.txt");
+
+
+
+	return 0;
+}
