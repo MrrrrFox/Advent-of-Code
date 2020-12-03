@@ -59,3 +59,25 @@ vector<string> readLineFromFile(const char * path)
 	
 	return data;
 }
+
+// reading chars from file of given path and return the matrix with values of these chars
+vector<vector<char>> readCharMatrixFromFile(const char * path)
+{
+	ifstream f;
+	f.open(path);
+	
+	string line;
+	vector<vector<char>> data;
+	vector<char> row;
+	int row_index = 0;
+	while(getline(f, line))
+	{
+		data.push_back(row);
+		for(int i=0; i<line.length(); ++i)
+			data[row_index].push_back(line[i]);
+		++row_index;
+	}
+	f.close();
+	
+	return data;
+}
