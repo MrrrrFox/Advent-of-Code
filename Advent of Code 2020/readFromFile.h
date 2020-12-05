@@ -81,3 +81,40 @@ vector<vector<char>> readCharMatrixFromFile(const char * path)
 	
 	return data;
 }
+
+// reading personal data (sepereted with empty line) from file of given path and return the matrix with line-values of each person
+vector<vector<string>> readPersonalDataFromFile(const char * path)
+{
+	ifstream f;
+	f.open(path);
+	
+	string line;
+	vector<vector<string>> data;
+	vector<string> person;
+	int person_index=0, pos=0;
+	
+	data.push_back(person);
+	
+	while(getline(f, line))
+	{
+		if(line.length()!=0)
+		{
+			pos=0;
+			for(int i=0; i<line.length(); ++i)
+				if(line.at(i)==' ')
+				{
+					data[person_index].push_back(line.substr(pos,i-pos));
+					pos=i+1;
+				}
+			data[person_index].push_back(line.substr(pos, line.length()-pos));
+		}
+		else
+		{
+			data.push_back(person);
+			++person_index;
+		}
+	}
+	f.close();
+	
+	return data;
+}
