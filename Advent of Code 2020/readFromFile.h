@@ -82,7 +82,7 @@ vector<vector<char>> readCharMatrixFromFile(const char * path)
 	return data;
 }
 
-// reading personal data (sepereted with empty line) from file of given path and return the matrix with line-values of each person
+// reading personal data (sepereted with empty line) from file of given path and return the matrix of string-values for each person
 vector<vector<string>> readPersonalDataFromFile(const char * path)
 {
 	ifstream f;
