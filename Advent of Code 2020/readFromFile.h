@@ -82,6 +82,23 @@ vector<vector<char>> readCharMatrixFromFile(const char * path)
 	return data;
 }
 
+// reading string-int tuple from file of given path and return the vector of such tuples
+vector<tuple<string,int>> readStringIntTupleFromFile(const char * path)
+{
+	ifstream f;
+	f.open(path);
+	
+	vector<tuple<string,int>> data;
+	string str;
+	int i;
+
+	while(f >> str >> i)
+		data.push_back(tuple<string,int>(str,i));
+	f.close();
+	
+	return data;
+}
+
 // reading personal data (sepereted with empty line) from file of given path and return the matrix of string-values for each person
 vector<vector<string>> readPersonalDataFromFile(const char * path)
 {
