@@ -24,6 +24,25 @@ vector<int> readIntDataFromFile(const char * path)
 	return data;
 }
 
+// reading doubles from file of given path and return the vector with values of these doubles
+vector<double> readDoubleDataFromFile(const char * path)
+{
+	ifstream f;
+	f.open(path);
+	
+	double num;
+	vector<double> data;
+
+	while(f.eof()!=1)
+	{
+		f >> num;
+		data.push_back(num);
+	}
+	f.close();
+	
+	return data;
+}
+
 // reading strings from file of given path and return the vector with values of these strings
 vector<string> readStringDataFromFile(const char * path)
 {
