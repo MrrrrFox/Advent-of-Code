@@ -94,7 +94,7 @@ vector<vector<char>> readCharMatrixFromFile(const char * path)
 	{
 		data.push_back(row);
 		for(int i=0; i<line.length(); ++i)
-			data[row_index].push_back(line[i]);
+			data[row_index].push_back(line.at(i));
 		++row_index;
 	}
 	f.close();
