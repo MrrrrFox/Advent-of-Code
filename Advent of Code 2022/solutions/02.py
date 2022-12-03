@@ -1,4 +1,4 @@
-from FileReading import read_2d_sting_matrix
+from FileReading import read_sting_matrix
 
 switcher = {'A': 0, 'X': 0, 'B': 1, 'Y': 1, 'C': 2, 'Z': 2}
 
@@ -17,7 +17,7 @@ def match_res_2(match_shapes):
     return res + 1
 
 
-data = read_2d_sting_matrix("data/02.txt")
+data = read_sting_matrix("data/02.txt")
 data_int = [list(map(map_rps_to_int, row)) for row in data]
 
 # 2.1
